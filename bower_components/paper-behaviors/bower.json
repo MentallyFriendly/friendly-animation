@@ -1,0 +1,60 @@
+{
+  "name": "paper-behaviors",
+  "version": "2.0.0",
+  "description": "Common behaviors across the paper elements",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "main": [
+    "paper-button-behavior.html",
+    "paper-checked-element-behavior.html",
+    "paper-inky-focus-behavior.html"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer",
+    "paper",
+    "behavior"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/paper-behaviors"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/paper-behaviors",
+  "dependencies": {
+    "iron-behaviors": "PolymerElements/iron-behaviors#2.0-preview",
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#2.0-preview",
+    "paper-ripple": "PolymerElements/paper-ripple#2.0-preview",
+    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "polymerelements/iron-component-page#2.0-preview",
+    "iron-test-helpers": "polymerelements/iron-test-helpers#2.0-preview",
+    "paper-material": "PolymerElements/paper-material#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#^3.0.0-rc.1",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+  },
+  "ignore": [],
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "iron-behaviors": "PolymerElements/iron-behaviors#^1.0.0",
+        "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#^1.0.0",
+        "paper-ripple": "PolymerElements/paper-ripple#^1.0.0",
+        "polymer": "Polymer/polymer#^1.1.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
+        "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
+        "paper-material": "PolymerElements/paper-material#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  }
+}
