@@ -17,10 +17,31 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <h3>Basic friendly-animation demo</h3>
+      <h2 style="margin-left:60px;">friendly-animation</h2>
       <demo-snippet>
         <template>
-          <friendly-animation></friendly-animation>
+          <friendly-animation url="../friendly.json"></friendly-animation>
+        </template>
+      </demo-snippet>
+      <demo-snippet>
+        <template>
+          <friendly-animation url="../friendly.json" alternate></friendly-animation>
+        </template>
+      </demo-snippet>
+      <demo-snippet>
+      <demo-snippet>
+        <template>
+          <friendly-animation url="../friendly.json" hover alternate></friendly-animation>
+        </template>
+      </demo-snippet>
+      <demo-snippet>
+        <template>
+          <friendly-animation url="../friendly.json" triggers="one, two, three, four" alternate></friendly-animation>
+
+          <button id="one" action="play-toggle">Play-toggle</button>
+          <button id="two" action="play">Play</button>
+          <button id="three" action="pause">Pause</button>
+          <button id="four" action="stop">Stop</button>
         </template>
       </demo-snippet>
     </div>

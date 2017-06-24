@@ -1,8 +1,16 @@
+<!-- TODO set svg or canvas -->
+<!-- TODO play to and stop -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<script src="bodymovin.js"></script>
 
 <!--
 `friendly-animation`
 A custom Polymer Element from the team at Mentally Friendly that wraps the Bodymovin library and allows a user to render After Effects animations in browser as either svg or html canvas animations.
+
+
+### Properties
+
 
 @demo demo/index.html
 -->
@@ -11,25 +19,294 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
   <template>
     <style>
       :host {
-        display: block;
+        /*display: block;*/
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+
+    <iron-ajax
+      auto
+      id="animationLoader"
+      url="[[url]]"
+      handle-as="json"
+      last-response="{{animationData}}"
+      last-error="{{error}}"
+      loading="{{animationLoading}}">
+    </iron-ajax>
+
+    <div id="animation" class="bodymovin" style$="height:{{height}}; width:{{width}}; display:{{cssDisplay}}"></div>
+
   </template>
 
   <script>
-    class MyElement extends Polymer.Element {
+    class FriendlyAnimation extends Polymer.Element {
       static get is() { return 'friendly-animation'; }
       static get properties() {
         return {
-          prop1: {
+          id: {
             type: String,
-            value: 'friendly-animation'
+            value: null,
+          },
+          url: {
+            type: String,
+            value: null,
+          },
+          animationData: {
+            type: Object,
+            value: null,
+            observer: '_onDataChange',
+          },
+          error: {
+            type: Object,
+            value: null,
+            observer: '_onError'
+          },
+          height: {
+            type: String,
+            value: 'auto',
+          },
+          width: {
+            type: String,
+            value: '200px',
+          },
+          cssDisplay: {
+            type: String,
+            value: 'inline-block',
+          },
+          loop: {
+            type: Boolean,
+            value: true,
+          },
+          renderer: {
+            type: String,
+            value: 'svg',
+          },
+          renderSettings: {
+            type: Object,
+            value: {
+              progressiveLoad: {
+                type: Boolean,
+                value: false,
+              },
+            }
+          },
+          anim: {
+            type: Object,
+            value: null,
+          },
+          autoplay : {
+            type: Boolean,
+            value: null,
+          },
+          // This is responsible for managing the play state of the component
+          state: {
+            type: String,
+            value: "null",
+            observer: '_stateChange',
+          },
+          hover: {
+            type: Boolean,
+            value: null,
+            observer: '_onHoverRequest',
+          },
+          segment: {
+            type: String,
+            value: null,
+          },
+          alternate: {
+            type: Boolean,
+            value: null,
+          },
+          direction: {
+            type: Number,
+            value: 1,
+          },
+          loopComplete: {
+            type: Boolean,
+            value: false,
+          },
+          animSegments: {
+            type: Array,
+            value: null,
+          },
+          triggers: {
+            type: String,
+            value: null,
+          },
+          scrollBind: {
+            type: String,
+            value: null,
+            observer: '_setScrollY',
+          },
+          scrollOffset: {
+            type: String,
+            value: null,
           }
         };
       }
+
+      // This is a description
+      _stateChange() {
+        if (this.anim) {
+          switch (this.state) {
+            case 1:
+              return this.anim.play()
+            case 2:
+              return this.anim.pause()
+            case 0:
+              return this.anim.stop()
+            case -1:
+              return this.anim.stop()
+            default:
+              return this.anim.stop()
+          }
+        }
+      }
+
+      _setScrollY() {
+        if (this.scrollBind) {
+          const self = this
+          const rootNode = this.getRootNode()
+          const scrollElementId = this.scrollBind.trim().toLowerCase()
+
+          const scrollTrigger = rootNode.querySelector(("#" + scrollElementId))
+          const scrollPoint = scrollTrigger.getBoundingClientRect().bottom + parseInt(this.scrollOffset)
+          let testFunc
+
+          window.addEventListener("scroll", testFunc = function() {
+            if (window.scrollY >= scrollPoint) {
+              self.state = 1
+              this.removeEventListener("scroll", testFunc, false)
+            }
+          }, false)
+        }
+      }
+
+      _setTriggers() {
+        if (this.anim) {
+          const triggerList = this.triggers.split(',').map((item) => {
+            return item.trim().toLowerCase()
+          })
+
+          const rootNode = this.getRootNode()
+
+          for (let i = 0; i < triggerList.length; i++) {
+            const trigger = rootNode.querySelector(('#' + triggerList[i]))
+            trigger.addEventListener("click", (e) => {
+              let action = e.path[0].attributes.action.value
+              switch (action) {
+                case "play":
+                  return  this.state = 1
+                case "pause":
+                  return this.state = 2
+                case "stop":
+                  return this.state = 0
+                case "play-toggle":
+                  return this.state === 1 ? this.state = 2 : this.state = 1
+                default:
+                  return this.state
+              }
+            })
+          }
+        }
+      }
+
+      _onHoverRequest() {
+        const animComp = this.$.animation;
+
+        if (this.hover) {
+          animComp.addEventListener("mouseenter", () => {
+            return this.state = 1
+          })
+          animComp.addEventListener("mouseleave", () => {
+            return this.state = 2
+          })
+        }
+      }
+
+      _onDataChange() {
+        if (this.animationData) {
+          this._initializeAnimation()
+        }
+      }
+
+      _onError() {
+        if (this.error) {
+          console.log('Error:', this.error)
+        }
+      }
+
+      _initializeAnimation() {
+        if (this.anim) {
+          this.state = -1
+        }
+
+        const params = {
+          container: this.$.animation,
+          renderer: this.renderer,
+          loop: this.loop,
+          autoplay: this.autoplay,
+          animationData: this.animationData,
+          renderSettings: this.renderSettings,
+        }
+
+        const anim = bodymovin.loadAnimation(params)
+        this.anim = anim
+
+        this.animSegments = [1, anim.totalFrames]
+        if (this.segment) {
+          this.animSegments = []
+          const segment = this.segment.split(',')
+          for (let i = 0; i < segment.length; i++) {
+            this.animSegments.push(parseInt(segment[i]))
+          }
+        }
+
+        this.state = 1
+        anim.playSegments(this.animSegments, true)
+
+        if (this.hover) {
+          this.state = 0
+          anim.stop()
+        }
+
+        if (this.scrollBind) {
+          this.state = 0
+          anim.stop()
+          this._setScrollY()
+        }
+
+        if (this.alternate) {
+          this._handleAlternate()
+        }
+
+        if (this.triggers) {
+          this.state = 0
+          this._setTriggers()
+        }
+
+        if (this.autoplay) {
+          this.state = 1
+        }
+      }
+
+      _handleAlternate() {
+        this.anim.removeEventListener("loopComplete");
+        this.anim.addEventListener("loopComplete", () => {
+          this.animSegments = this.animSegments.reverse()
+          this.state = 1
+          this.anim.playSegments(this.animSegments, true)
+        })
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback()
+
+        this.state = 0
+        this.anim.destroy()
+        this.anim = null
+      }
     }
 
-    window.customElements.define(MyElement.is, MyElement);
+    window.customElements.define(FriendlyAnimation.is, FriendlyAnimation);
   </script>
 </dom-module>

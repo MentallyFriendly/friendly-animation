@@ -1,3 +1,19 @@
+<!--
+ ```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="friendly-animation.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<other-element></other-element>
+<my-element></my-element>
+```
+
+
 # \<friendly-animation\>
 
 A custom Polymer Element from the team at Mentally Friendly that wraps the Bodymovin library and allows a user to render After Effects animations in browser as either svg or html canvas animations.
