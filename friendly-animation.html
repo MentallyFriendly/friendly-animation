@@ -1,15 +1,18 @@
-<!-- TODO set svg or canvas -->
-<!-- TODO play to and stop -->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <script src="bodymovin.js"></script>
 
 <!--
-`friendly-animation`
-A custom Polymer Element from the team at Mentally Friendly that wraps the Bodymovin library and allows a user to render After Effects animations in browser as either svg or html canvas animations.
+`friendly-animation` is a custom Polymer Element from the team at Mentally Friendly that wraps the Bodymovin library and allows a user to render After Effects animations in browser as either svg or html canvas animations.
+
+Example:
+
+  <friendly-animation url="../friendly.json" autoplay></friendly-animation>
 
 
-### Properties
+Example:
+
+  <friendly-animation url="../friendly.json" hover></friendly-animation>
 
 
 @demo demo/index.html
@@ -19,7 +22,6 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
   <template>
     <style>
       :host {
-        /*display: block;*/
       }
     </style>
 
@@ -42,44 +44,104 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
       static get is() { return 'friendly-animation'; }
       static get properties() {
         return {
+          /**
+           * This is the Id of your animation component
+          */
           id: {
             type: String,
             value: null,
           },
+
+          /**
+           * This is the path to your exported `.json` file from After Effects.
+          */
           url: {
             type: String,
             value: null,
           },
+
+          /**
+           * This is the data that comes back from your components `iron-ajax` request after hitting your json file.
+           * An observer waits for this response and once this property is inflated begins calls the `_initializeAnimation()`
+           * function to construct your animation component.
+          */
           animationData: {
             type: Object,
             value: null,
             observer: '_onDataChange',
           },
+
+          /**
+           * Some basic error handling printed to the console
+          */
           error: {
             type: Object,
             value: null,
             observer: '_onError'
           },
-          height: {
-            type: String,
-            value: 'auto',
-          },
+
+          /**
+           * Some default width is set here but can be overridden by passing
+           * a width property to your component, `width="50%"` for eg.
+          */
           width: {
             type: String,
             value: '200px',
           },
+
+          /**
+           * Again default height is set here but can be overridden also.
+          */
+          height: {
+            type: String,
+            value: 'auto',
+          },
+
+          /**
+           * Some basic setup positioning of your component, but your component
+           * can be custom styled and positioned by the user.
+          */
           cssDisplay: {
             type: String,
             value: 'inline-block',
           },
+
+          /**
+           * This is part of the Bodymovin' library and is required to
+           * create your `anim` object.
+          */
           loop: {
             type: Boolean,
             value: true,
           },
+
+          svg: {
+            type: Boolean,
+            value: null,
+          },
+          canvas: {
+            type: Boolean,
+            value: null,
+          },
+
+          /**
+           * Determines in what format your animation will render.
+           * Defaults to `svg` but simply type `canvas` on your animation
+           * component and it will render as `html canvas` instead.
+           * If you have lots of small animations within the one exported
+           * After Effects scene, consider rendering as `canvas` to improve
+           * browser performance.
+          */
           renderer: {
             type: String,
-            value: 'svg',
+            computed: '_setRenderer(svg, canvas)',
           },
+
+          /**
+           * This is part part of the Bodymovin' library and is a
+           * required to create your `anim` object. There is generally
+           * no need to interact with this.
+          */
           renderSettings: {
             type: Object,
             value: {
@@ -89,62 +151,128 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
               },
             }
           },
+
+          /**
+           * This is your animation object.
+          */
           anim: {
             type: Object,
             value: null,
           },
+
+          /**
+           * The mere presence of `autoplay` on your animation component
+           * will make your animation play on load.
+           * Do not have `autoplay` on your component if you are using an
+           * alternate trigger eg hover.
+          */
           autoplay : {
             type: Boolean,
             value: null,
           },
-          // This is responsible for managing the play state of the component
+
+          /**
+           * This manages the state of the animation. The states are:
+           * `play = 1`, `pause = 2`, `stop = 0`, and `removed = -1`,
+           * and may be controlled from outside of the component.
+           */
           state: {
             type: String,
             value: "null",
             observer: '_stateChange',
           },
+
+          /**
+           * Pass the word `hover` to your component and it becomes an animation
+           * that starts and stops on hover. Simple :)
+          */
           hover: {
             type: Boolean,
             value: null,
             observer: '_onHoverRequest',
           },
+
+          /**
+           * Pass a segment range to your component to only play a particular segment (frames)
+           * of your animation. Eg passing your component `segment="4, 23"` will make only
+           * frames 4 - 23 of your animation play.
+          */
           segment: {
             type: String,
             value: null,
           },
+
+          /**
+           * Pass your component the word `alternate` and your animation component now
+           * plays forwards to backwards to forwards ...etc
+          */
           alternate: {
             type: Boolean,
             value: null,
           },
-          direction: {
-            type: Number,
-            value: 1,
-          },
-          loopComplete: {
-            type: Boolean,
-            value: false,
-          },
+
+          /**
+           * This property is internal to the component and manages the segments being
+           * played and their direction.
+          */
           animSegments: {
             type: Array,
             value: null,
           },
+
+          /**
+           * This property is a collection of element ID's you want to have control over
+           * your animation component. Make sure to set an `action="play"` or one of the
+           * other permitted actions, on the element/button/input etc.
+          */
           triggers: {
             type: String,
             value: null,
           },
+
+          /**
+           * Pass the ID of an element you want to `scroll Y` bind your component
+           * with (generally an element directly above your animation component).
+          */
           scrollBind: {
             type: String,
             value: null,
-            observer: '_setScrollY',
           },
-          scrollOffset: {
+
+          /**
+           * A Boolean to trigger additional scroll listeners once an animation
+           * component has scrolled past it's start point has begun playing.
+           * This won't need to be touched.
+          */
+          hasScrolled: {
+            type: Boolean,
+            value: false,
+          },
+
+          /**
+           * An offset value you can pass to your animation component to
+           * tweak it's top trigger point. Eg `scroll-top-trigger="200"`
+          */
+          scrollTopTrigger: {
             type: String,
-            value: null,
-          }
+            value: "0"
+          },
+
+          /**
+           * An offset value you can pass to your animation component to
+           * tweak it's bottom trigger point. Eg `scroll-bottom-trigger="500"`
+          */
+          scrollBottomTrigger: {
+            type: String,
+            value: "0"
+          },
         };
       }
 
-      // This is a description
+      /**
+       * This function is an observer on the `state` property and fires
+       * any time a change in play state is requested.
+      */
       _stateChange() {
         if (this.anim) {
           switch (this.state) {
@@ -162,25 +290,54 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         }
       }
 
+      /**
+       * This function computes the value of the `renderer` property.
+       * Returns SVG by default.
+      */
+      _setRenderer(svg, canvas) {
+        return canvas ? "canvas" : "svg"
+      }
+
+      /*
+      * This function sets and toggles animation play state based on the
+      * location of a bound element and scroll offsets provided by the user.
+      */
       _setScrollY() {
         if (this.scrollBind) {
-          const self = this
-          const rootNode = this.getRootNode()
+          const topTriggerPt = parseInt(this.scrollTopTrigger)
+          const bottomTriggerPt = parseInt(this.scrollBottomTrigger)
           const scrollElementId = this.scrollBind.trim().toLowerCase()
+          const element = this.getRootNode().querySelector(("#" + scrollElementId))
+          let scrollHandler
+          window.addEventListener("scroll", scrollHandler = () => {
+            let scrolled = this.hasScrolled
+            let topElTarget = element.getBoundingClientRect().bottom + topTriggerPt
+            let bottomElTarget = element.getBoundingClientRect().top - screen.height + bottomTriggerPt
+            let screenTop = window.pageYOffset
+            let screenBottom = window.pageYOffset - screen.height
 
-          const scrollTrigger = rootNode.querySelector(("#" + scrollElementId))
-          const scrollPoint = scrollTrigger.getBoundingClientRect().bottom + parseInt(this.scrollOffset)
-          let testFunc
+            if (bottomElTarget < 0) {
+              this.state = 1
+              this.hasScrolled = true
 
-          window.addEventListener("scroll", testFunc = function() {
-            if (window.scrollY >= scrollPoint) {
-              self.state = 1
-              this.removeEventListener("scroll", testFunc, false)
+              let afterScrollListener
+              window.addEventListener("scroll", afterScrollListener = () => {
+                let topTarget = element.getBoundingClientRect().bottom + parseInt(this.scrollTopTrigger)
+                let bottomTarget = element.getBoundingClientRect().top - screen.height + parseInt(this.scrollBottomTrigger)
+
+                if ((topTarget < 0 || bottomTarget > 0) && scrolled) {
+                  this.state = 0
+                }
+              })
             }
-          }, false)
+          })
         }
       }
 
+      /*
+      * This function separated the passed in trigger elements, deternmines their type,
+      * and animates the component based on their passed in `action` attribute.
+      */
       _setTriggers() {
         if (this.anim) {
           const triggerList = this.triggers.split(',').map((item) => {
@@ -192,7 +349,11 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
           for (let i = 0; i < triggerList.length; i++) {
             const trigger = rootNode.querySelector(('#' + triggerList[i]))
             trigger.addEventListener("click", (e) => {
+              if (trigger.nodeName === "INPUT" && this.state === 1) {
+                return
+              }
               let action = e.path[0].attributes.action.value
+
               switch (action) {
                 case "play":
                   return  this.state = 1
@@ -210,8 +371,12 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         }
       }
 
+      /*
+      * This function is an observer on the `hover` property and toggles the
+      * animation play state based on mouse location.
+      */
       _onHoverRequest() {
-        const animComp = this.$.animation;
+        const animComp = this.$.animation
 
         if (this.hover) {
           animComp.addEventListener("mouseenter", () => {
@@ -223,18 +388,30 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         }
       }
 
+      /*
+      * This function is an observer on the `animationData` property and
+      * calls the `initializeAnimation` function once the iron-ajax response
+      * has returned.
+      */
       _onDataChange() {
         if (this.animationData) {
           this._initializeAnimation()
         }
       }
 
+      /*
+      * Simple logging to the console of any errors
+      */
       _onError() {
         if (this.error) {
           console.log('Error:', this.error)
         }
       }
 
+      /*
+      * This function builds the animation object, and checks
+      * for any property values and play types passed in to the component.
+      */
       _initializeAnimation() {
         if (this.anim) {
           this.state = -1
@@ -264,15 +441,13 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         this.state = 1
         anim.playSegments(this.animSegments, true)
 
-        if (this.hover) {
-          this.state = 0
-          anim.stop()
-        }
-
         if (this.scrollBind) {
           this.state = 0
-          anim.stop()
           this._setScrollY()
+        }
+
+        if (this.hover) {
+          this.state = 0
         }
 
         if (this.alternate) {
@@ -289,8 +464,13 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         }
       }
 
+      /*
+      * This function handles reverse looping of the animation.
+      * Each time a loop is complete the playable animation segments
+      * reverse in order and play in the opposite direction.
+      */
       _handleAlternate() {
-        this.anim.removeEventListener("loopComplete");
+        this.anim.removeEventListener("loopComplete")
         this.anim.addEventListener("loopComplete", () => {
           this.animSegments = this.animSegments.reverse()
           this.state = 1
@@ -298,12 +478,19 @@ A custom Polymer Element from the team at Mentally Friendly that wraps the Bodym
         })
       }
 
-      disconnectedCallback() {
+      /*
+      * Destroys any animations and removes all event listeners.
+      */
+      _disconnectedCallback() {
         super.disconnectedCallback()
 
         this.state = 0
         this.anim.destroy()
         this.anim = null
+        window.removeEventListener("scroll", resetFunc, false)
+        this.removeEventListener("scroll")
+        this.removeEventListener("loopComplete")
+        this.removeEventListener("click")
       }
     }
 

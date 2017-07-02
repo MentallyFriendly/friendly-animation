@@ -124,7 +124,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       setup(function() {
         lightDOM = fixture('LightDOM');
-        input = lightDOM.querySelector('#input');
+        input = Polymer.dom(lightDOM).querySelector('#input');
         lightDescendantShadowInput = Polymer.dom(lightDOM)
             .querySelector('nested-focusable').$.input;
       });

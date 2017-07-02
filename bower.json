@@ -1,6 +1,24 @@
 {
   "name": "friendly-animation",
   "description": "A Polymer component that enables the user to render After Effects animations in browser as either svg or html canvas animations.",
+  "authors": [
+    "Justin Davidson",
+    "justin@mentallyfriendly.com",
+    "Mentally Friendly"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "animation",
+    "bodymovin",
+    "svg",
+    "canvas"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:MentallyFriendly/friendly-animation.git"
+  },
   "main": "friendly-animation.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0-rc.2"
@@ -9,7 +27,7 @@
     "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
     "web-component-tester": "v6.0.0-prerelease.5",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.5"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.5",
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.2"

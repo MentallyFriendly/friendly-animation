@@ -74,7 +74,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var rippleContainer = this._rippleContainer || this.root;
         if (rippleContainer) {
           Polymer.dom(rippleContainer).appendChild(this._ripple);
-          Polymer.dom.flush();
         }
         if (optTriggeringEvent) {
           // Check if the event happened inside of the ripple container

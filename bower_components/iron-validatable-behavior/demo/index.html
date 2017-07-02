@@ -30,12 +30,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 <body>
   <div class="vertical-section-container centered">
-    <h3>The <code>cats-only</code> validator only accepts the string "cats"</h3>
+    <h3>The <code>cats-only</code> validator only accepts the string "cats" and
+      its suffixes ("c", "ca", "cat").</h3>
     <demo-snippet class="centered-demo">
       <template>
         <custom-style>
           <style is="custom-style" include="demo-pages-shared-styles">
-            validatable-input:not([invalid]) {
+            validatable-input {
               border: 1px solid var(--google-green-500);
               color: var(--google-green-500);
             }

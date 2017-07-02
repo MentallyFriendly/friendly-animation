@@ -1,5 +1,6 @@
 {
   "name": "paper-behaviors",
+  "version": "2.0.0",
   "description": "Common behaviors across the paper elements",
   "authors": [
     "The Polymer Authors"
@@ -24,18 +25,18 @@
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/paper-behaviors",
   "dependencies": {
-    "iron-behaviors": "PolymerElements/iron-behaviors#2.0-preview",
-    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#2.0-preview",
-    "paper-ripple": "PolymerElements/paper-ripple#2.0-preview",
-    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+    "iron-behaviors": "PolymerElements/iron-behaviors#1 - 2",
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#1 - 2",
+    "paper-ripple": "PolymerElements/paper-ripple#1 - 2",
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "polymerelements/iron-component-page#2.0-preview",
-    "iron-test-helpers": "polymerelements/iron-test-helpers#2.0-preview",
-    "paper-material": "PolymerElements/paper-material#2.0-preview",
+    "iron-component-page": "polymerelements/iron-component-page#1 - 2",
+    "iron-test-helpers": "polymerelements/iron-test-helpers#1 - 2",
+    "paper-styles": "PolymerElements/paper-styles#1 - 2",
     "test-fixture": "PolymerElements/test-fixture#^3.0.0-rc.1",
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "ignore": [],
   "variants": {
@@ -44,25 +45,31 @@
         "iron-behaviors": "PolymerElements/iron-behaviors#^1.0.0",
         "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#^1.0.0",
         "paper-ripple": "PolymerElements/paper-ripple#^1.0.0",
-        "polymer": "Polymer/polymer#^1.1.0"
+        "polymer": "Polymer/polymer#^1.9"
       },
       "devDependencies": {
         "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
         "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
-        "paper-material": "PolymerElements/paper-material#^1.0.0",
+        "paper-styles": "PolymerElements/paper-styles#^1.0.0",
         "test-fixture": "PolymerElements/test-fixture#^1.0.0",
         "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
-  "_release": "f08f03835f",
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "f08f03835ff3219b354398a757a52cbbccfe291d"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "38b38b062e7b7415b91a87b281bb11cdc74d6723"
   },
   "_source": "https://github.com/PolymerElements/paper-behaviors.git",
-  "_target": "2.0-preview",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/paper-behaviors"
 }

@@ -8,16 +8,28 @@
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
+    <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../friendly-animation.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
+      body {
+        font-family: sans-serif;
+      }
+      paper-button {
+        color: #40254f;
+      }
     </style>
   </head>
   <body>
     <div class="vertical-section-container centered">
       <h2 style="margin-left:60px;">friendly-animation</h2>
+      <demo-snippet>
+        <template>
+          <friendly-animation url="../friendly.json"></friendly-animation>
+        </template>
+      </demo-snippet>
       <demo-snippet>
         <template>
           <friendly-animation url="../friendly.json"></friendly-animation>
@@ -38,10 +50,10 @@
         <template>
           <friendly-animation url="../friendly.json" triggers="one, two, three, four" alternate></friendly-animation>
 
-          <button id="one" action="play-toggle">Play-toggle</button>
-          <button id="two" action="play">Play</button>
-          <button id="three" action="pause">Pause</button>
-          <button id="four" action="stop">Stop</button>
+          <paper-button id="one" action="play-toggle" raised>Play-toggle</paper-button>
+          <paper-button id="two" action="play" raised>Play</paper-button>
+          <paper-button id="three" action="pause" raised>Pause</paper-button>
+          <paper-button id="four" action="stop" raised>Stop</paper-button>
         </template>
       </demo-snippet>
     </div>

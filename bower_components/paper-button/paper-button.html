@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-behaviors/paper-button-behavior.html">
-<link rel="import" href="../paper-styles/element-styles/paper-material.html">
+<link rel="import" href="../paper-styles/element-styles/paper-material-styles.html">
 
 <!--
 Material design: [Buttons](https://www.google.com/design/spec/components/buttons.html)
@@ -83,9 +83,9 @@ Custom property | Description | Default
 
 <dom-module id="paper-button">
   <template strip-whitespace>
-    <style include="paper-material">
+    <style include="paper-material-styles">
       /* Need to specify the same specificity as the styles imported from paper-material. */
-      :host, :host(.paper-material) {
+      :host {
         @apply --layout-inline;
         @apply --layout-center-center;
         position: relative;
@@ -109,6 +109,26 @@ Custom property | Description | Default
 
         @apply --paper-font-common-base;
         @apply --paper-button;
+      }
+
+      :host([elevation="1"]) {
+        @apply --paper-material-elevation-1;
+      }
+
+      :host([elevation="2"]) {
+        @apply --paper-material-elevation-2;
+      }
+
+      :host([elevation="3"]) {
+        @apply --paper-material-elevation-3;
+      }
+
+      :host([elevation="4"]) {
+        @apply --paper-material-elevation-4;
+      }
+
+      :host([elevation="5"]) {
+        @apply --paper-material-elevation-5;
       }
 
       :host([hidden]) {
@@ -164,10 +184,6 @@ Custom property | Description | Default
           value: false,
           observer: '_calculateElevation'
         }
-      },
-
-      created: function() {
-        this.classList.add('paper-material');
       },
 
       _calculateElevation: function() {
