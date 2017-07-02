@@ -1,6 +1,6 @@
 {
   "name": "friendly-animation",
-  "description": "A custom Polymer Element from the team at Mentally Friendly that wraps the Bodymovin library and allows a user to render After Effects animations in browser as either svg or html canvas animations.",
+  "description": "A Polymer component that enables the user to render After Effects animations in browser as either svg or html canvas animations.",
   "main": "friendly-animation.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0-rc.2"
