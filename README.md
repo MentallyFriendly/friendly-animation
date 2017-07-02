@@ -11,23 +11,24 @@
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="friendly-animation.html">
     <style>
-      friendly-animation {
-        max-width: 400px;
-        margin: auto;
-      }
     </style>
   </template>
+  <next-code-block></next-code-block>
 </custom-element-demo>
 ```
 -->
+```html
+<friendly-animation url="friendly.json" autoplay></friendly-animation>
+```
+
 The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property and add `autoplay` to have your play on load.
 ```html
-<friendly-animation url="../data.json" autoplay></friendly-animation>
+<friendly-animation url="data.json" autoplay></friendly-animation>
 ```
 
 A `friendly-animation` component can also recieve a list of element id's to control it's play state. Simply pass in the id's of the elements as triggers to the animation and make sure to set one of the four actions. `play`, `pause`, `stop`, or `play-toggle`.
 ```html
-<friendly-animation url="../data.json" triggers="one, two, three, four"></friendly-animation>
+<friendly-animation url="data.json" triggers="one, two, three, four"></friendly-animation>
 
 <button id="one" action="play">Play</button>
 <button id="two" action="pause">Pause</button>
