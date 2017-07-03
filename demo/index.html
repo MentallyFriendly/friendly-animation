@@ -17,8 +17,25 @@
       body {
         font-family: sans-serif;
       }
-      paper-button {
-        color: #40254f;
+      .flex-wrapper {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+      }
+      .hover-span, .span-color {
+        color: #15ffde;
+        cursor: default;
+        -webkit-font-smoothing: antialiased;
+        transition: color 1.5s ease;
+      }
+      .hover-span:hover {
+        color: #F60A62;
+      }
+      friendly-animation {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </head>
@@ -27,33 +44,45 @@
       <h2 style="margin-left:60px;">friendly-animation</h2>
       <demo-snippet>
         <template>
-          <friendly-animation url="../friendly.json"></friendly-animation>
+          <div class="flex-wrapper">
+            <h3>All it really needs is the path to your .json file</h3>
+            <friendly-animation url="../friendly.json" width="50%"></friendly-animation>
+            <h4>..but it can do more...</h4>
+          </div>
         </template>
       </demo-snippet>
-      <demo-snippet>
-        <template>
-          <friendly-animation url="../friendly.json"></friendly-animation>
-        </template>
-      </demo-snippet>
-      <demo-snippet>
-        <template>
-          <friendly-animation url="../friendly.json" alternate></friendly-animation>
-        </template>
-      </demo-snippet>
-      <demo-snippet>
-      <demo-snippet>
-        <template>
-          <friendly-animation url="../friendly.json" hover alternate></friendly-animation>
-        </template>
-      </demo-snippet>
-      <demo-snippet>
-        <template>
-          <friendly-animation url="../friendly.json" triggers="one, two, three, four" alternate></friendly-animation>
 
-          <paper-button id="one" action="play-toggle" raised>Play-toggle</paper-button>
-          <paper-button id="two" action="play" raised>Play</paper-button>
-          <paper-button id="three" action="pause" raised>Pause</paper-button>
-          <paper-button id="four" action="stop" raised>Stop</paper-button>
+      <demo-snippet>
+        <template>
+          <div class="flex-wrapper">
+            <h3>Add the property <span class="span-color">alternate</span> and it now keeps swapping its play direction</h3>
+            <friendly-animation url="../friendly.json" alternate width="50%"></friendly-animation>
+          </div>
+        </template>
+      </demo-snippet>
+
+      <demo-snippet>
+        <template>
+          <div class="flex-wrapper">
+            <h3>..or have your animation play on <span class="hover-span">hover</span></h3>
+            <friendly-animation url="../friendly.json" hover alternate width="50%"></friendly-animation>
+          </div>
+        </template>
+      </demo-snippet>
+
+      <demo-snippet>
+        <template>
+          <div class="flex-wrapper">
+            <h3>Pass the id(s) of any elements you wish to be a <span class="span-color">trigger</span> for you animation play state</h3>
+            <friendly-animation url="../friendly.json" triggers="one, two, three, four" alternate width="50%"></friendly-animation>
+            <div class="triggers">
+              <paper-button id="one" action="play-toggle" raised>Play-toggle</paper-button>
+              <paper-button id="two" action="play" raised>Play</paper-button>
+              <paper-button id="three" action="pause" raised>Pause</paper-button>
+              <paper-button id="four" action="stop" raised>Stop</paper-button>
+            </div>
+            <h4>...make sure the element id you pass also has one of the four <span class="span-color">action</span> attributes</h4>
+          </div>
         </template>
       </demo-snippet>
     </div>

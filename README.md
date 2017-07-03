@@ -10,6 +10,7 @@
 <custom-element-demo>
   <template>
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel-"import" href="bower_components/paper-button/paper-button.html">
     <link rel="import" href="friendly-animation.html">
     <style>
     </style>
