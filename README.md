@@ -5,31 +5,7 @@
 
 `<friendly-animation>` is a Polymer 2.0 component that wraps the [Bodymovin'](https://github.com/bodymovin/bodymovin) After Effects plugin. It enables the user to render After Effects animations in browser as either html canvas or svg animations and comes with a handful of convenience methods to interact with your animation(s).
 
-<!--
-```
-<custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="bodymovin.js"></script>
-    <link rel="import" href="friendly-animation.html">
-    <style is="custom-style">
-      body {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: auto;
-      }
-    </style>
-  </template>
-  <next-code-block></next-code-block>
-</custom-element-demo>
-```
--->
-```html
-<friendly-animation url="planet.json"></friendly-animation>
-```
+
 
 The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property. If no interactions are stated it will autoplay by default.
 ```html
