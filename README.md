@@ -10,6 +10,7 @@
 ```
 <custom-element-demo>
   <template>
+    <script src="bodymovin.js"></script>
     <link rel="import" href="friendly-animation.html">
     <style>
     </style>
