@@ -20,12 +20,12 @@
 ```
 -->
 ```html
-<friendly-animation url="planet.json" autoplay></friendly-animation>
+<friendly-animation url="planet.json"></friendly-animation>
 ```
 
-The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property and add `autoplay` to have your play on load.
+The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property. If no interactions are stated it will autoplay by default.
 ```html
-<friendly-animation url="data.json" autoplay></friendly-animation>
+<friendly-animation url="data.json"></friendly-animation>
 ```
 
 A `friendly-animation` component can also receive a list of element id's to control it's play state. Simply pass in the id's of the elements as triggers to the animation and make sure to set one of the four actions. `play`, `pause`, `stop`, or `play-toggle`.
@@ -38,7 +38,7 @@ A `friendly-animation` component can also receive a list of element id's to cont
 <button id="four" action="play-toggle">Play-Toggle</button>
 ```
 
-*For additional interactions and properties please see the API Docs*
+*For additional interactions and properties including `scroll-y`, `segment` and `hover` please see the API Docs*
 
 ### Requirements
  - install the Bodymovin' plugin for After Effects, from [here](http://aescripts.com/bodymovin/). Once you download the `.zxp` file i recommend installing [ZXP Installer](http://aescripts.com/learn/zxp-installer/), which will do a lot of the leg work in installing the **Bodymovin'** plugin for you.
