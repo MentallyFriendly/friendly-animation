@@ -1,6 +1,6 @@
 {
   "name": "friendly-animation",
-  "description": "A Polymer component that enables the user to render After Effects animations in browser as either svg or html canvas animations.",
+  "description": "A Polymer 2.0 component that enables the user to render After Effects animations in browser as either svg or html canvas animations.",
   "authors": [
     "Justin Davidson <justin@mentallyfriendly.com>",
     "Mentally Friendly"
