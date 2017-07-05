@@ -30,3 +30,5 @@ A `friendly-animation` component can also receive a list of element id's to cont
 
 ### Note
 The Bodymovin' library that underpins my component is where the magic happens. [Hernan](https://github.com/bodymovin) has done an incredible job and has been just so helpful in answering questions and improving his library. That said, After Effects is a beast, and while the Bodymovin' library supports a lot of AE animtaion, there are some features which are yet to be supported. E.g Particle Systems. I recommend testing an AE animation in its early stages. Save and render and then choose `preview` to see if your desired animation effect is supported. Hernan is a rockstar and updates to the Bodymovin' library are extremely regular. It's open all sourced and if anyone has the know how please give him a hand!
+
+=^..^=
