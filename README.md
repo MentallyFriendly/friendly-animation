@@ -1,10 +1,20 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/mentallyfriendly/friendly-animation)
 
 
-## &lt;friendly-animation&gt;
+# &lt;friendly-animation&gt;
 
 `<friendly-animation>` is a Polymer 2.0 component that wraps the [Bodymovin'](https://github.com/bodymovin/bodymovin) After Effects plugin. It enables the user to render After Effects animations in browser as either html canvas or svg animations and comes with a handful of convenience methods to interact with your animation(s).
+<br />
+<br />
 
+## Latest release notes
+
+### v2.0.9
+- Trigger action `play-toggle` has been renamed to `toggle`
+ * The four trigger actions are now `play`, `pause`, `stop` and `toggle`.  
+  
+---
+<br />  
 
 
 The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property. If no interactions are stated it will autoplay by default.
