@@ -3,6 +3,8 @@
 
 ## &lt;friendly-animation&gt;
 
+[SEE DEMO SITE HERE](http://animation.mentallyfriendly.com)
+
 `<friendly-animation>` is a Polymer 2.0 component that wraps the [Bodymovin'](https://github.com/bodymovin/bodymovin) After Effects plugin. It enables the user to render After Effects animations in browser as either html canvas or svg animations and comes with a handful of convenience methods to interact with your animation(s).
 
 
@@ -12,14 +14,14 @@ The most simple setup is to pass your After Effects/Bodymovin' exported`.json` f
 <friendly-animation url="data.json"></friendly-animation>
 ```
 
-A `friendly-animation` component can also receive a list of element id's to control it's play state. Simply pass in the id's of the elements as triggers to the animation and make sure to set one of the four actions. `play`, `pause`, `stop`, or `play-toggle`.
+A `friendly-animation` component can also receive a list of element id's to control it's play state. Simply pass in the id's of the elements as triggers to the animation and make sure to set one of the four actions. `play`, `pause`, `stop`, or `toggle`.
 ```html
 <friendly-animation url="data.json" triggers="one, two, three, four"></friendly-animation>
 
 <button id="one" action="play">Play</button>
 <button id="two" action="pause">Pause</button>
 <button id="three" action="stop">Stop</button>
-<button id="four" action="play-toggle">Play-Toggle</button>
+<button id="four" action="toggle">Toggle</button>
 ```
 
 *For additional interactions and properties including `scroll-y`, `segment` and `hover` please see the API Docs*
