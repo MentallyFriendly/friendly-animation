@@ -365,39 +365,6 @@
         }
       }
 
-      // _setTriggers() {
-      //   if (this.anim) {
-      //     const triggerList = this.triggers.split(',').map((item) => {
-      //       return item.trim().toLowerCase()
-      //     })
-      //
-      //     const rootNode = this.getRootNode()
-      //
-      //     for (let i = 0; i < triggerList.length; i++) {
-      //       const trigger = rootNode.querySelector(('#' + triggerList[i]))
-      //       trigger.addEventListener("click", (e) => {
-      //         if (trigger.nodeName === "INPUT" && this.state === 1) {
-      //           return
-      //         }
-      //         let action = e.path[0].attributes.action.value
-      //
-      //         switch (action) {
-      //           case "play":
-      //             return  this.state = 1
-      //           case "pause":
-      //             return this.state = 2
-      //           case "stop":
-      //             return this.state = 0
-      //           case "toggle":
-      //             return this.state === 1 ? this.state = 2 : this.state = 1
-      //           default:
-      //             return this.state
-      //         }
-      //       })
-      //     }
-      //   }
-      // }
-
       /*
       * This function is an observer on the `hover` property and toggles the
       * animation play state based on mouse location.
