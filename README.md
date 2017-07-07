@@ -1,12 +1,22 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/mentallyfriendly/friendly-animation)
 
 
-## &lt;friendly-animation&gt;
+# &lt;friendly-animation&gt;
 
 [SEE DEMO SITE HERE](http://animation.mentallyfriendly.com)
 
 `<friendly-animation>` is a Polymer 2.0 component that wraps the [Bodymovin'](https://github.com/bodymovin/bodymovin) After Effects plugin. It enables the user to render After Effects animations in browser as either html canvas or svg animations and comes with a handful of convenience methods to interact with your animation(s).
+<br />
+<br />
 
+## Latest release notes
+
+### v2.0.8
+- Trigger action `play-toggle` has been renamed to `toggle`
+ * The four trigger actions are now `play`, `pause`, `stop` and `toggle`.  
+  
+---
+<br />  
 
 
 The most simple setup is to pass your After Effects/Bodymovin' exported`.json` file to the `friendly-component` as it's `url` property. If no interactions are stated it will autoplay by default.
@@ -32,3 +42,5 @@ A `friendly-animation` component can also receive a list of element id's to cont
 
 ### Note
 The Bodymovin' library that underpins my component is where the magic happens. [Hernan](https://github.com/bodymovin) has done an incredible job and has been just so helpful in answering questions and improving his library. That said, After Effects is a beast, and while the Bodymovin' library supports a lot of AE animtaion, there are some features which are yet to be supported. E.g Particle Systems. I recommend testing an AE animation in its early stages. Save and render and then choose `preview` to see if your desired animation effect is supported. Hernan is a rockstar and updates to the Bodymovin' library are extremely regular. It's open all sourced and if anyone has the know how please give him a hand!
+
+=^..^=
