@@ -11,6 +11,9 @@
 
 ## Latest release notes
 
+### v2.10.0
+* Updated with version 4.12.3 of Bodymovin.js Player
+
 ### v2.0.8
 - Trigger action `play-toggle` has been renamed to `toggle`
  * The four trigger actions are now `play`, `pause`, `stop` and `toggle`.  
